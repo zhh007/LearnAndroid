@@ -8,11 +8,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
-public class Demo1Activity extends Activity {
+public class Demo1Activity extends Activity implements OnPageChangeListener {
 
 	/**
 	 * PagerAdapter 数据源：List<View>，加载3个View，多余自动销毁
@@ -63,6 +65,8 @@ public class Demo1Activity extends Activity {
 		
 		MyPagerAdapter adapter = new MyPagerAdapter(viewList, titleList);
 		pager.setAdapter(adapter);
+		//pager.setOnPageChangeListener(this);//已过时
+		pager.addOnPageChangeListener(this);
 	}
 
 	@Override
@@ -82,5 +86,22 @@ public class Demo1Activity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageSelected(int arg0) {
+		Toast.makeText(this, "当前是第" + (arg0+1) + "个页面", Toast.LENGTH_SHORT).show();
 	}
 }
